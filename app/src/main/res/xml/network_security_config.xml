@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" /> <!-- Permite 10.0.2.2 en emulador -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">dann.local</domain> <!-- Permite teléfono real -->
+    </domain-config>
+</network-security-config>
