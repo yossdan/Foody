@@ -1,141 +1,148 @@
 package com.example.foodyapp
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.toolbox.Volley
 import com.example.foodyapp.databinding.ActivityNuevaRecetaBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import android.util.Log
-import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 
-import android.widget.LinearLayout
-import android.widget.TextView
-
-
+@Suppress("DEPRECATION")
 class NuevaReceta : AppCompatActivity() {
 
     private lateinit var binding: ActivityNuevaRecetaBinding
     private var saborSeleccionado: String? = null
+    private var imagenBytes: ByteArray? = null
+
+    private val seleccionarImagen =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+
+            if (result.resultCode == Activity.RESULT_OK) {
+                val uri = result.data?.data ?: return@registerForActivityResult
+
+                val input = contentResolver.openInputStream(uri)
+                val bitmap = BitmapFactory.decodeStream(input)
+
+                if (bitmap != null) {
+                    val baos = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos)
+                    imagenBytes = baos.toByteArray()
+
+                    Toast.makeText(this, "Imagen seleccionada 👍", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Error al cargar la imagen", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        // Inicializamos ViewBinding
         binding = ActivityNuevaRecetaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Usamos el string-array desde resources
         val sabores = resources.getStringArray(R.array.sabores_array)
+
+        binding.btnAtras.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+
+            overridePendingTransition(
+                android.R.anim.slide_in_left, // Slide-in suave de la actividad que queda
+                android.R.anim.fade_out       // Fade-out de la actividad actual
+            )
+        }
 
         binding.btnSeleccionarSabor.setOnClickListener {
             mostrarDialogoSabores(sabores)
         }
 
-        binding.btnAtras.setOnClickListener {
-            finish()
+        binding.btnSubirImagen.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+            }
+            seleccionarImagen.launch(intent)
         }
 
+        binding.btnGuardarReceta.setOnClickListener {
+            guardarReceta()
+        }
+    }
+
+    private fun guardarReceta() {
+
+        if (imagenBytes == null) {
+            Toast.makeText(this, "Selecciona una imagen primero", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val nombre = binding.NombreReceta.text.toString().trim()
+        val tiempo = binding.TiempoPreparacion.text.toString().trim()
+        val ingrediente = binding.Ingredientes.text.toString().trim()
+        val pasos = binding.Pasos.text.toString().trim()
+
+        if (nombre.isEmpty() || tiempo.isEmpty() || ingrediente.isEmpty() || pasos.isEmpty() || saborSeleccionado.isNullOrEmpty()) {
+            Toast.makeText(this, "Llena todos los campos", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // 🔥 OBTENER ID USUARIO REAL DEL LOGIN
+        val prefs = getSharedPreferences("FoodyPrefs", MODE_PRIVATE)
+        val idUsuario = prefs.getString("IdUsuario", null)
+
+        if (idUsuario == null) {
+            Toast.makeText(this, "Error: no se encontró el usuario", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        // 🔥 ENVIAR EL ID REAL
+        val params = mapOf(
+            "nueva_receta" to nombre,
+            "tiempo_preparacion" to tiempo,
+            "sabor_platillo" to saborSeleccionado!!,
+            "ingrediente" to ingrediente,
+            "pasos" to pasos,
+            "IdUsuario" to idUsuario      // ← YA NO ES "1"
+        )
+
+
+        val url = "http://10.0.2.2/Foody/insert.php"
+
+        val request = MultipartRequest(
+            url = url,
+            params = params,
+            fileKey = "imagen",
+            fileData = imagenBytes!!,
+            fileName = "foto.jpg",
+            listener = { response ->
+                val json = JSONObject(response)
+                Toast.makeText(this, json.getString("message"), Toast.LENGTH_SHORT).show()
+
+                if (json.getString("status") == "success") {
+                    finish()
+                }
+            },
+            errorListener = {
+                Toast.makeText(this, "Error: ${it.message}", Toast.LENGTH_LONG).show()
+            }
+        )
+
+        Volley.newRequestQueue(this).add(request)
     }
 
     private fun mostrarDialogoSabores(sabores: Array<String>) {
-        MaterialAlertDialogBuilder(this).apply {
-            setTitle(getString(R.string.selecciona_sabor))
-            setItems(sabores) { _, which ->
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Selecciona el sabor")
+            .setItems(sabores) { _, which ->
                 saborSeleccionado = sabores[which]
                 binding.btnSeleccionarSabor.text = saborSeleccionado
             }
-            show()
-        }
-
-        val NuevaReceta = findViewById<EditText>(R.id.NombreReceta)
-        val TiempoPreparacion = findViewById<EditText>(R.id.TiempoPreparacion)
-        //val SaborPlatillo = saborSeleccionado ?: ""
-        val botonGuardar : Button = findViewById<Button>(R.id.btnGuardarReceta)
-        val Ingredientes = findViewById<EditText>(R.id.Ingredientes)
-        val Pasos = findViewById<EditText>(R.id.Pasos)
-
-
-
-        val url ="http://10.0.2.2/Foody/insert.php"
-        //val url = "http://dann.local/Foody/insert.php"
-        val queue = Volley.newRequestQueue(this)
-
-
-
-
-        botonGuardar.setOnClickListener {
-            val nueva_receta = NuevaReceta.text.toString().trim()
-            val tiempo_preparacion = TiempoPreparacion.text.toString().trim()
-            val sabor_platillo = saborSeleccionado?.trim() ?: ""
-            val ingrediente = Ingredientes.text.toString().trim()
-            val pasos = Pasos.text.toString().trim()
-
-            Log.d(ingrediente, "aa")
-            Log.d(pasos, "aa")
-
-            if (nueva_receta.isEmpty()) {
-                NuevaReceta.error = "Este campo es obligatorio"
-                Toast.makeText(this, "Ingresa un nonmbre", Toast.LENGTH_LONG).show()
-
-            }
-            if (ingrediente.isEmpty()) {
-                Ingredientes.error = "Este campo es obligatorio"
-                Toast.makeText(this, "Ingresa los ingredientes", Toast.LENGTH_LONG).show()
-
-            }
-            if (pasos.isEmpty()) {
-                Pasos.error = "Este campo es obligatorio"
-                Toast.makeText(this, "Ingresa los pasos", Toast.LENGTH_LONG).show()
-
-            }
-            if (tiempo_preparacion.isEmpty()){
-                TiempoPreparacion.error = "Este campo es obligatorio"
-                Toast.makeText(this, "Ingresa un tiempo", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            val stringRequest = object : StringRequest(
-                Request.Method.POST, url,
-                { response ->
-                    try {
-                        val json = JSONObject(response)
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        Toast.makeText(this, json.optString("message"), Toast.LENGTH_SHORT).show()
-                    } catch (e: Exception){
-                        Toast.makeText(this, "Registro exitoso: $response", Toast.LENGTH_LONG).show()
-                    }
-                },
-                { error ->
-                    Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_LONG).show()
-                }
-            ){
-                override fun getParams(): MutableMap<String, String> {
-                    val params = HashMap<String, String>()
-                        params["nueva_receta"] = nueva_receta;
-                        params["tiempo_preparacion"] = tiempo_preparacion;
-                        params["sabor_platillo"] = sabor_platillo;
-                        params["ingrediente"] = ingrediente;
-                        params["pasos"] = pasos;
-
-
-                        return params
-                }
-            }
-
-            queue.add(stringRequest)
-        }
-
-
+            .show()
     }
-
-
 }

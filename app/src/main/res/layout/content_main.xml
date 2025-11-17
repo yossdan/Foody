@@ -26,27 +26,27 @@
         android:backgroundTint="#00FF0000"
         android:text="Nueva receta"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#000000"
+        android:textColor="@color/btn"
         app:icon="@drawable/plus_solid_full"
-        app:iconTint="#090808"
+        app:iconTint="@color/btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.37"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/favoritos"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.048" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/favoritos"
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="51dp"
         android:backgroundTint="#00FF0000"
         android:text="Recetas favoritas"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textColor="#000000"
+        android:textColor="@color/btn"
         app:icon="@drawable/heart_regular_full"
-        app:iconTint="#1A1818"
+        app:iconTint="@color/btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.163"
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.048" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/Imagen1"
         android:layout_width="148dp"
         android:layout_height="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,8 +66,28 @@
         app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/ic_menu_gallery" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favorito1"
+        android:layout_width="35dp"
+        android:layout_height="32dp"
+        android:text=""
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:icon="@drawable/heart_regular_full"
+        app:iconTint="@color/btn"
+        app:iconGravity="textStart"
+        app:elevation="0dp"
+        app:pressedTranslationZ="0dp"
+        android:layout_margin="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.628"/>
+
+
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/Imagen3"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="148dp"
         android:layout_height="148dp"
@@ -75,25 +95,119 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.343"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/Imagen1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/ic_menu_gallery" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favorito3"
+        android:layout_width="49dp"
+        android:layout_height="34dp"
+        android:text=""
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:icon="@drawable/heart_regular_full"
+        app:iconTint="@color/btn"
+        app:iconGravity="textStart"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633"/>
+
+
+
+
+
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/Imagen2"
         android:layout_width="148dp"
         android:layout_height="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.186"
+        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818"
+        app:layout_constraintVertical_bias="0.842"
         app:srcCompat="@drawable/ic_menu_gallery" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favorito2"
+        android:layout_width="50dp"
+        android:layout_height="41dp"
+        android:text=""
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:icon="@drawable/heart_regular_full"
+        app:iconTint="@color/btn"
+        app:iconGravity="textStart"
+        app:elevation="0dp"
+        app:pressedTranslationZ="0dp"
+        android:layout_margin="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926"/>
+
+
+    <TextView
+        android:id="@+id/Producto4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product name"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brand"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
+
+    <TextView
+        android:id="@+id/Producto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product name"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Brand"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.148"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
+
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/Imagen4"
         android:layout_width="148dp"
         android:layout_height="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,8 +215,28 @@
         app:layout_constraintHorizontal_bias="0.832"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818"
+        app:layout_constraintVertical_bias="0.842"
         app:srcCompat="@drawable/ic_menu_gallery" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favorito4"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:text=""
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:icon="@drawable/heart_regular_full"
+        app:iconTint="@color/btn"
+        app:iconGravity="textStart"
+        app:elevation="0dp"
+        app:pressedTranslationZ="0dp"
+        android:layout_margin="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.902"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939"/>
+
 
     <TextView
         android:id="@+id/textView3"
@@ -118,7 +252,7 @@
         app:layout_constraintVertical_bias="0.612" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/Producto1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product name"
@@ -129,32 +263,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.633" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Brand"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product name"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
 
     <TextView
         android:id="@+id/textView7"
@@ -170,7 +278,7 @@
         app:layout_constraintVertical_bias="0.612" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/Producto3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Product name"
@@ -182,44 +290,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.633" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Brand"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.589"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product name"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893" />
-
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/Recetas"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="130dp"
         android:layout_height="35dp"
         android:backgroundTint="#00FF0000"
         android:drawableEnd="@drawable/angle_right_solid_full"
         android:drawablePadding="8dp"
-        android:drawableTint="#0F0E0E"
+        android:drawableTint="@color/btn"
         android:text="Recetas"
         android:textAllCaps="false"
-        android:textColor="#000000"
+        android:textColor="@color/btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"

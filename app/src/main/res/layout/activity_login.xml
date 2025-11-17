@@ -1,65 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/white"
     tools:context=".Login">
 
+    <!-- LOGO (Aparece primero con animación de escritura) -->
+
+
+    <!-- CONTENEDOR FORMULARIO (oculto al inicio) -->
+
     <TextView
-        android:id="@+id/textView19"
-        android:layout_width="124dp"
-        android:layout_height="86dp"
+        android:id="@+id/textViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/dancing"
         android:text="Foody"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="@color/btn"
+        android:textSize="42sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.252" />
+        app:layout_constraintVertical_bias="0.344" />
 
-    <EditText
-        android:id="@+id/usuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/containerLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Usuario"
-        android:inputType="text"
+        android:layout_marginTop="24dp"
+        android:alpha="0"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:translationY="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintTop_toBottomOf="@id/textViewLogo"
+        app:layout_constraintVertical_bias="0.0">
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.517" />
+        <!-- Usuario -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutUsuario"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Usuario"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/btn">
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#070707"
-        android:text="Iniciar sesión"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usuario"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:autofillHints="username"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contraseña"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/btn"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:autofillHints="password"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón Login -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="@color/btn"
+            android:text="Iniciar sesión"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:cornerRadius="26dp" />
+
+        <!-- Línea separadora -->
+        <TextView
+            android:id="@+id/textOr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="o continúa con"
+            android:textColor="#888"
+            android:textSize="14sp"
+            android:layout_marginTop="22dp" />
+
+        <!-- CONTENEDOR SOCIAL LOGIN -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp">
+
+            <!-- GOOGLE -->
+            <ImageButton
+                android:id="@+id/btnGoogle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:src="@drawable/google"
+                android:background="@android:color/transparent"
+                android:contentDescription="Google" />
+
+            <!-- FACEBOOK -->
+            <ImageButton
+                android:id="@+id/btnFacebook"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
+                android:src="@drawable/facebook"
+                android:background="@android:color/transparent"
+                android:contentDescription="Facebook" />
+
+            <!-- APPLE -->
+            <ImageButton
+                android:id="@+id/btnApple"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
+                android:src="@drawable/apple"
+                android:background="@android:color/transparent"
+                android:contentDescription="Apple" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

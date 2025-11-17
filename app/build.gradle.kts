@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+
+    id("kotlin-kapt")
 }
 
 android {
@@ -39,6 +41,8 @@ android {
 }
 
 dependencies {
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    kapt("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.9.3")
     implementation(libs.volley)

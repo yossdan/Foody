@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemFavorito"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <ImageButton
+        android:id="@+id/ImagenComida"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="301dp"
+        android:layout_height="134dp"
+        android:outlineProvider="paddedBounds"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_menu_gallery" />
+
+    <TextView
+        android:id="@+id/NombreComida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text="Nombre del producto"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ImagenComida" />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripción"
+        app:layout_constraintTop_toBottomOf="@id/NombreComida"
+        app:layout_constraintStart_toStartOf="@id/NombreComida"
+        android:layout_marginTop="4dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favorito"
+        android:layout_width="40dp"
+        android:layout_height="38dp"
+        android:layout_margin="0dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text=""
+        app:elevation="0dp"
+        app:icon="@drawable/heart_regular_full"
+        app:iconGravity="textStart"
+        app:iconTint="@color/btn"
+        app:layout_constraintBottom_toBottomOf="@id/NombreComida"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/NombreComida"
+        app:layout_constraintVertical_bias="0.0"
+        app:pressedTranslationZ="0dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
