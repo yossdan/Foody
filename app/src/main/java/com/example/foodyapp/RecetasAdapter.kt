@@ -1,11 +1,11 @@
 package com.example.foodyapp
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -13,8 +13,9 @@ class RecetasAdapter(private val lista: List<ModelRecetas>) :
     RecyclerView.Adapter<RecetasAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imgReceta: ImageView = itemView.findViewById(R.id.imgReceta)
-        val nombreReceta: TextView = itemView.findViewById(R.id.NombreReceta)
+        val imagen: ImageView = itemView.findViewById(R.id.imgReceta)
+        val nombre: TextView = itemView.findViewById(R.id.txtNombreReceta)
+        val autorNombre: TextView = itemView.findViewById(R.id.txtAutorReceta)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,23 +27,26 @@ class RecetasAdapter(private val lista: List<ModelRecetas>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val receta = lista[position]
 
-        // Asigna el nombre
-        holder.nombreReceta.text = receta.nombre
+        holder.nombre.text = receta.nombre
+        holder.autorNombre.text = receta.autorNombre
 
-        // Carga la imagen con Glide (desde URL)
         Glide.with(holder.itemView.context)
             .load(receta.imagen)
-            .into(holder.imgReceta)
+            .into(holder.imagen)
 
         holder.itemView.setOnClickListener {
-
-            Toast.makeText(
-                holder.itemView.context,
-                "Seleccionaste: ${receta.nombre}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val context = holder.itemView.context
+            val intent = Intent(context, CrudRecetas::class.java)
+            intent.putExtra("IdReceta", receta.id)
+            context.startActivity(intent)
         }
 
+        holder.autorNombre.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, PerfilPublicoActivity::class.java)
+            intent.putExtra("IdUsuarioPerfil", receta.autorId)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = lista.size

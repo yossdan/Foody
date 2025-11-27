@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainRegistro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="@color/white">
+
+    <!-- LOGO FOODY (mismo estilo que login) -->
+
+    <!-- SUBTÍTULO MINIMAL -->
+
+    <!-- CONTENEDOR FORMULARIO -->
+
+    <TextView
+        android:id="@+id/textViewLogoRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="216dp"
+        android:fontFamily="@font/dancing"
+        android:text="Foody"
+        android:textColor="@color/btn"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSubRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Crea tu cuenta para guardar tus recetas"
+        android:textColor="#888888"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLogoRegistro" />
+
+    <LinearLayout
+        android:id="@+id/containerRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSubRegistro"
+        app:layout_constraintVertical_bias="0.0">
+
+        <!-- Usuario -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutUsuarioRegistro"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Usuario"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/btn">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtUsuarioRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/LayoutCorreo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="Email"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/btn">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Correoedt"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <!-- Contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPasswordRegistro"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Contraseña"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/btn"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPasswordRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirmar contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutConfirmarPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Confirmar contraseña"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/btn"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtConfirmarPassword"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón Crear cuenta -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCrearCuenta"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/btn"
+            android:text="Crear cuenta"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:cornerRadius="26dp" />
+
+        <!-- Volver a iniciar sesión (opcional pero útil) -->
+        <TextView
+            android:id="@+id/txtIrLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:text="¿Ya tienes cuenta? Iniciar sesión"
+            android:textColor="@color/btn"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

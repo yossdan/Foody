@@ -1,6 +1,8 @@
 package com.example.foodyapp
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import org.json.JSONObject
+import com.example.foodyapp.CrudRecetas
 
 class FavoritosAdapter(
     private var listaFavoritos: MutableList<Favorito>,
@@ -49,6 +52,15 @@ class FavoritosAdapter(
 
         // ❤️ Icono del corazón
         actualizarIconoFavorito(holder.btnFavorito, item.esFavorito, holder.itemView.context)
+
+        holder.imagenComida.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, CrudRecetas::class.java)
+            intent.putExtra("IdReceta", item.id) // item.id sigue siendo String
+            context.startActivity(intent)
+        }
+
+
 
         // Click para cambiar favorito
         holder.btnFavorito.setOnClickListener {

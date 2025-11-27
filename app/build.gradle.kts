@@ -41,7 +41,9 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.gms:play-services-auth:21.4.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.constraintlayout)
     kapt("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.compose.ui:ui-text-google-fonts:1.9.3")
@@ -58,4 +60,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }

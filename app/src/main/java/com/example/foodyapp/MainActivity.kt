@@ -10,34 +10,65 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.ui.AppBarConfiguration
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
-import org.json.JSONObject
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
-import androidx.core.content.ContextCompat
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    // Guardar los IDs de las 4 recetas
+    // Guardar los IDs y estados de las recetas recientes
     private val idsRecetas = mutableListOf<Int>()
     private val estadosFavorito = mutableListOf<Int>() // 0 o 1
+
+    // Cola de Volley reutilizable
+    private val queue by lazy { Volley.newRequestQueue(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.inicio
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.Mensajes -> {
+                    val intent = Intent(this, ListaChatsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.feed -> {
+                    startActivity(Intent(this, FeedActivity::class.java))
+                    finish()
+                    true
+                }
+                R.id.inicio -> {
+                    // Ir a la pantalla principal
+                    startActivity(Intent(this, MainActivity::class.java))
+                    true
+                }
+                R.id.perfil -> {
+                    // Ir a tu pantalla de perfil (crea PerfilActivity si no la tienes)
+                    startActivity(Intent(this, PerfilActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
 
         val btnRecetas = findViewById<Button>(R.id.Recetas)
         btnRecetas.setOnClickListener {
-            val intent = Intent(this, Recetas::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Recetas::class.java))
         }
-
 
         val btnNuevaReceta: Button = findViewById(R.id.btnNuevareceta)
         val imageView = findViewById<ImageView>(R.id.imagenFotograma)
@@ -47,9 +78,8 @@ class MainActivity : AppCompatActivity() {
         val idUsuario = prefs.getString("IdUsuario", "") ?: ""
 
         // ------------------------------
-        // FOTOGRAMAS
+        // FOTOGRAMAS (SLIDESHOW)
         // ------------------------------
-
         val imagenes = arrayOf(R.drawable.frame1, R.drawable.frame2, R.drawable.frame3)
         var index = 0
         val handler = Handler(Looper.getMainLooper())
@@ -71,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
         cambiarImagen()
 
-        // Cargar recetas con favoritos
+        // Cargar recetas recientes con favoritos
         cargarRecetasRecientes(idUsuario)
 
         btnNuevaReceta.setOnClickListener {
@@ -86,17 +116,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cargarRecetasRecientes(idUsuario: String) {
+        if (idUsuario.isBlank()) {
+            println("IdUsuario vacío, no se pueden cargar recientes")
+            return
+        }
+
         val url = "http://10.0.2.2/foody/recientes.php?IdUsuario=$idUsuario"
-        val queue = Volley.newRequestQueue(this)
 
         val request = StringRequest(
-            Request.Method.GET, url,
+            Request.Method.GET,
+            url,
             { response ->
                 println("RESPONSE PHP: $response")
 
                 val json = JSONObject(response)
 
-                // Validar status
                 val status = json.optString("status", "error")
                 if (status != "success") {
                     val message = json.optString("message", "Error desconocido")
@@ -110,6 +144,7 @@ class MainActivity : AppCompatActivity() {
                     return@StringRequest
                 }
 
+                // Vistas de la UI
                 val imagenesBtn = listOf(
                     findViewById<ImageButton>(R.id.Imagen1),
                     findViewById<ImageButton>(R.id.Imagen2),
@@ -134,7 +169,16 @@ class MainActivity : AppCompatActivity() {
                 idsRecetas.clear()
                 estadosFavorito.clear()
 
-                for (i in 0 until data.length()) {
+                // Máximo 4 items (los que caben en la UI)
+                val maxItems = minOf(
+                    data.length(),
+                    imagenesBtn.size,
+                    textos.size,
+                    favoritosBtn.size
+                )
+
+                // Rellenar solo las tarjetas que tienen receta
+                for (i in 0 until maxItems) {
                     val receta = data.getJSONObject(i)
                     val idReceta = receta.getInt("IdRecetas")
                     val nombre = receta.getString("NombreReceta")
@@ -144,17 +188,30 @@ class MainActivity : AppCompatActivity() {
                     idsRecetas.add(idReceta)
                     estadosFavorito.add(favorito)
 
+                    // Texto
                     textos[i].text = nombre
 
+                    // Imagen
                     Glide.with(this)
                         .load(imagen)
                         .into(imagenesBtn[i])
 
+                    // Click en la imagen → detalle de esa receta
+                    imagenesBtn[i].isEnabled = true
+                    imagenesBtn[i].alpha = 1f
+                    imagenesBtn[i].setOnClickListener {
+                        val intent = Intent(this, CrudRecetas::class.java)
+                        intent.putExtra("IdReceta", idReceta)
+                        startActivity(intent)
+                    }
+
+                    // Estado inicial del favorito
                     favoritosBtn[i].icon = if (favorito == 1)
                         ContextCompat.getDrawable(this, R.drawable.corazon_lleno)
                     else
                         ContextCompat.getDrawable(this, R.drawable.heart_regular_full)
 
+                    favoritosBtn[i].isEnabled = true
                     favoritosBtn[i].setOnClickListener {
                         val estaMarcado = estadosFavorito[i] == 1
                         cambiarEstadoFavorito(idUsuario, idReceta, !estaMarcado) {
@@ -167,6 +224,18 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
+                // Limpiar / desactivar las tarjetas sobrantes
+                for (i in maxItems until imagenesBtn.size) {
+                    textos[i].text = ""
+                    imagenesBtn[i].setImageDrawable(null)
+                    imagenesBtn[i].isEnabled = false
+                    imagenesBtn[i].alpha = 0f
+                    imagenesBtn[i].setOnClickListener(null)
+
+                    favoritosBtn[i].icon = null
+                    favoritosBtn[i].isEnabled = false
+                    favoritosBtn[i].setOnClickListener(null)
+                }
             },
             { error ->
                 error.printStackTrace()
@@ -175,20 +244,25 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(request)
     }
-    private val queue by lazy { Volley.newRequestQueue(this) }
 
-    private fun cambiarEstadoFavorito(idUsuario: String, idReceta: Int, marcar: Boolean, callback: () -> Unit) {
+    private fun cambiarEstadoFavorito(
+        idUsuario: String,
+        idReceta: Int,
+        marcar: Boolean,
+        callback: () -> Unit
+    ) {
         val url = "http://10.0.2.2/foody/recientes.php"
         val accion = if (marcar) "marcar" else "quitar"
 
-        val req = object : StringRequest(Method.POST, url,
-            { response ->
-                // Opcional: parsear respuesta JSON si quieres validar
+        val req = object : StringRequest(
+            Method.POST,
+            url,
+            { _ ->
+                // Si el servidor responde OK, actualizamos UI vía callback
                 callback()
             },
             { error ->
                 error.printStackTrace()
-                // Mostrar log o Toast de error
             }
         ) {
             override fun getParams(): MutableMap<String, String> {
@@ -202,5 +276,4 @@ class MainActivity : AppCompatActivity() {
 
         queue.add(req)
     }
-
 }

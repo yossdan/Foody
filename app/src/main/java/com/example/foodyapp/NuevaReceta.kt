@@ -92,7 +92,7 @@ class NuevaReceta : AppCompatActivity() {
             return
         }
 
-        // 🔥 OBTENER ID USUARIO REAL DEL LOGIN
+// 🔥 OBTENER ID USUARIO REAL DEL LOGIN
         val prefs = getSharedPreferences("FoodyPrefs", MODE_PRIVATE)
         val idUsuario = prefs.getString("IdUsuario", null)
 
@@ -101,15 +101,20 @@ class NuevaReceta : AppCompatActivity() {
             return
         }
 
-        // 🔥 ENVIAR EL ID REAL
+// 🔥 LEER EL SWITCH "Publicar en el feed"
+        val esPublica = if (binding.switchPublicar.isChecked) "1" else "0"
+
+// 🔥 ENVIAR EL ID REAL + EsPublica
         val params = mapOf(
-            "nueva_receta" to nombre,
+            "nueva_receta"       to nombre,
             "tiempo_preparacion" to tiempo,
-            "sabor_platillo" to saborSeleccionado!!,
-            "ingrediente" to ingrediente,
-            "pasos" to pasos,
-            "IdUsuario" to idUsuario      // ← YA NO ES "1"
+            "sabor_platillo"     to saborSeleccionado!!,
+            "ingrediente"        to ingrediente,
+            "pasos"              to pasos,
+            "IdUsuario"          to idUsuario,   // ID del usuario logueado
+            "EsPublica"          to esPublica   // 👈 NUEVO CAMPO
         )
+
 
 
         val url = "http://10.0.2.2/Foody/insert.php"

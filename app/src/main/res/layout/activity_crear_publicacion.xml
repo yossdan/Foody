@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:padding="16dp"
+    tools:context=".CrearPublicacionActivity">
+
+    <!-- TÍTULO / HEADER -->
+    <TextView
+        android:id="@+id/txtTituloCrearPublicacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Crear publicación"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- CARD PRINCIPAL: AVATAR + NOMBRE + TEXTO -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="18dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="3dp"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloCrearPublicacion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <!-- FILA AVATAR + NOMBRE + PRIVACIDAD -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgAvatarPost"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/user_solid_full" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp">
+
+                    <TextView
+                        android:id="@+id/txtNombreUsuarioPost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tú"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtPrivacidadPost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Público"
+                        android:textSize="11sp"
+                        android:textColor="#555555"
+                        android:background="#FFEFEFEF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- CAMPO DE TEXTO DEL POST -->
+            <EditText
+                android:id="@+id/edtTexto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minHeight="96dp"
+                android:background="@android:color/transparent"
+                android:hint="¿Qué estás pensando?"
+                android:textColorHint="#B0B0B0"
+                android:gravity="top|start"
+                android:paddingTop="4dp"
+                android:textSize="14sp"
+                android:inputType="textMultiLine"
+                android:maxLines="6"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- PREVIEW DE IMAGEN -->
+    <ImageView
+        android:id="@+id/imgPreview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:background="#F5F5F5"
+        android:scaleType="centerCrop"
+        android:contentDescription="Imagen de la publicación"
+        app:layout_constraintTop_toBottomOf="@id/cardPost"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="4:3"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <!-- BOTÓN AGREGAR IMAGEN - ESTILO UBER (NEGRO PILL) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSeleccionarImagen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Agregar imagen"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        app:cornerRadius="999dp"
+        android:backgroundTint="@android:color/black"
+        app:icon="@drawable/plus_solid_full"
+        app:iconTint="@android:color/white"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/imgPreview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- BOTÓN PUBLICAR - ESTILO UBER (NEGRO PILL) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPublicar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Publicar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-medium"
+        app:cornerRadius="999dp"
+        android:backgroundTint="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/btnSeleccionarImagen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

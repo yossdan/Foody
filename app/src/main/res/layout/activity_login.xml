@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/nombre_receta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
@@ -101,6 +101,29 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="26dp" />
+
+        <TextView
+            android:id="@+id/txtCrearCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="¿No tienes cuenta? Crear cuenta"
+            android:textColor="@color/btn"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:id="@+id/txtOlvidePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="¿Olvidaste tu contraseña?"
+            android:textColor="@color/btn"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+
 
         <!-- Línea separadora -->
         <TextView

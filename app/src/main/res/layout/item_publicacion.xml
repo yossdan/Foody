@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="6dp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- AVATAR -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAutor"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/user_solid_full"
+            app:civ_border_width="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- NOMBRE -->
+        <TextView
+            android:id="@+id/txtAutor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Nombre autor"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/imgAutor"
+            app:layout_constraintStart_toEndOf="@id/imgAutor"
+            app:layout_constraintEnd_toStartOf="@id/btnOpciones" />
+
+        <!-- FECHA -->
+        <TextView
+            android:id="@+id/txtFecha"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="3 min ago"
+            android:textSize="12sp"
+            android:textColor="#808080"
+            app:layout_constraintTop_toBottomOf="@id/txtAutor"
+            app:layout_constraintStart_toEndOf="@id/imgAutor"
+            app:layout_constraintEnd_toStartOf="@id/btnOpciones" />
+
+        <!-- TRES PUNTOS -->
+        <ImageView
+            android:id="@+id/btnOpciones"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/tres"
+            app:layout_constraintTop_toTopOf="@id/imgAutor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="#808080" />
+
+        <!-- IMAGEN DEL POST -->
+        <ImageView
+            android:id="@+id/imgContenido"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            android:background="#E0E0E0"
+            app:layout_constraintTop_toBottomOf="@id/imgAutor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="4:3"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <!-- TEXTO DE LA PUBLICACIÓN -->
+        <TextView
+            android:id="@+id/txtTexto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Post description"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/imgContenido"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- FILA CONTADORES (LIKES / COMMENTS) -->
+        <LinearLayout
+            android:id="@+id/layoutCounters"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/txtTexto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/txtLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 likes"
+                android:textSize="13sp"
+                android:drawableLeft="@drawable/corazon_lleno"
+                android:drawablePadding="6dp" />
+
+            <TextView
+                android:id="@+id/txtComentarios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="0 comments"
+                android:textSize="13sp"
+                android:drawableLeft="@drawable/comments_solid_full"
+                android:drawablePadding="6dp" />
+        </LinearLayout>
+
+        <!-- FILA DE BOTONES (ME GUSTA / COMENTAR / COMPARTIR) -->
+        <LinearLayout
+            android:id="@+id/layoutButtons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/layoutCounters"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/btnLike"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Me gusta"
+                android:textSize="13sp"
+                android:drawableStart="@drawable/like"
+                android:drawablePadding="6dp" />
+
+
+            <TextView
+                android:id="@+id/btnComment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Comentar"
+                android:drawableStart="@drawable/comentario"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/btnShare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Compartir"
+                android:drawableStart="@drawable/share"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

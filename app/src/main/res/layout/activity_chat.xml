@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainChat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="12dp"
+    tools:context=".ChatActivity">
+
+    <!-- HEADER -->
+<androidx.constraintlayout.widget.ConstraintLayout
+android:id="@+id/headerChat"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:background="@android:color/white"
+android:elevation="4dp"
+android:paddingStart="8dp"
+android:paddingEnd="8dp"
+android:paddingTop="12dp"
+android:paddingBottom="12dp"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent">
+
+<ImageButton
+    android:id="@+id/btnBack"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:background="@android:color/transparent"
+    android:padding="4dp"
+    android:src="@drawable/angle_left_solid_full"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+<ImageView
+    android:id="@+id/imgAvatarChat"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:src="@drawable/user_solid_full"
+    android:layout_marginStart="12dp"
+    app:layout_constraintStart_toEndOf="@id/btnBack"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+<TextView
+    android:id="@+id/txtNombreChat"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="Nombre usuario"
+    android:textStyle="bold"
+    android:textSize="20sp"
+    android:textColor="@android:color/black"
+    android:maxLines="1"
+    android:ellipsize="end"
+    android:layout_marginStart="10dp"
+    app:layout_constraintStart_toEndOf="@id/imgAvatarChat"
+    app:layout_constraintEnd_toStartOf="@id/btnCall"
+    app:layout_constraintTop_toTopOf="@id/imgAvatarChat" />
+
+<TextView
+    android:id="@+id/txtEstadoChat"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="Activo hace 11 min"
+    android:textSize="14sp"
+    android:textColor="#808080"
+    android:maxLines="1"
+    android:ellipsize="end"
+    app:layout_constraintStart_toStartOf="@id/txtNombreChat"
+    app:layout_constraintTop_toBottomOf="@id/txtNombreChat"
+    app:layout_constraintEnd_toEndOf="@id/txtNombreChat" />
+
+<ImageButton
+    android:id="@+id/btnCall"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:background="@android:color/transparent"
+    android:padding="6dp"
+    android:src="@drawable/call"
+    android:layout_marginEnd="8dp"
+    app:layout_constraintEnd_toStartOf="@id/btnVideo"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+<ImageButton
+    android:id="@+id/btnVideo"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:background="@android:color/transparent"
+    android:padding="6dp"
+    android:src="@drawable/video"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- DIVISOR -->
+<View
+android:id="@+id/dividerTop"
+android:layout_width="0dp"
+android:layout_height="1dp"
+android:background="#EEEEEE"
+app:layout_constraintTop_toBottomOf="@id/headerChat"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- LISTA DE MENSAJES -->
+<androidx.recyclerview.widget.RecyclerView
+android:id="@+id/recyclerChat"
+android:layout_width="0dp"
+android:layout_height="0dp"
+android:clipToPadding="false"
+android:paddingStart="8dp"
+android:paddingEnd="8dp"
+android:paddingTop="12dp"
+android:paddingBottom="12dp"
+app:layout_constraintTop_toBottomOf="@id/dividerTop"
+app:layout_constraintBottom_toTopOf="@id/inputBar"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+tools:listitem="@layout/item_message_other" />
+
+    <!-- BARRA INFERIOR -->
+<LinearLayout
+android:id="@+id/inputBar"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_vertical"
+android:paddingStart="4dp"
+android:paddingEnd="4dp"
+android:paddingTop="6dp"
+android:paddingBottom="6dp"
+android:layout_marginTop="8dp"
+android:layout_marginBottom="8dp"
+android:background="@android:color/white"
+app:layout_constraintBottom_toBottomOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent">
+
+<EditText
+    android:id="@+id/txtMensaje"
+    android:layout_width="0dp"
+    android:layout_height="48dp"
+    android:layout_weight="1"
+    android:background="@drawable/bg_chat_input"
+    android:hint="Mensaje..."
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:textSize="16sp"
+    android:inputType="textMultiLine"
+    android:maxLines="4"
+    android:minHeight="48dp" />
+
+<ImageButton
+    android:id="@+id/btnEnviar"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_marginStart="10dp"
+    android:background="@android:color/transparent"
+    android:padding="8dp"
+    android:src="@drawable/ic_send_24" />
+
+</LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

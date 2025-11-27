@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgAvatarItemChat"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/user_solid_full"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtNombreItemChat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre usuario"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintStart_toEndOf="@id/imgAvatarItemChat"
+        app:layout_constraintTop_toTopOf="@id/imgAvatarItemChat"
+        app:layout_constraintEnd_toStartOf="@id/txtFechaItemChat"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/txtUltimoMensajeItemChat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Último mensaje..."
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="#808080"
+        app:layout_constraintStart_toStartOf="@id/txtNombreItemChat"
+        app:layout_constraintTop_toBottomOf="@id/txtNombreItemChat"
+        app:layout_constraintEnd_toStartOf="@id/txtFechaItemChat"
+        />
+
+    <TextView
+        android:id="@+id/txtFechaItemChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="09:41"
+        android:textSize="11sp"
+        android:textColor="#999999"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtNombreItemChat"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

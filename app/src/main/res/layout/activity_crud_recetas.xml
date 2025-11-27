@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- ENCABEZADO: BOTÓN ATRÁS + TÍTULO -->
+
+        <!-- IMAGEN -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="45dp"
+            android:layout_marginBottom="24dp">
+
+            <ImageButton
+                android:id="@+id/btnAtrasActualizar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Atrás"
+                android:src="@drawable/angle_left_solid_full"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/txt_titulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Nueva Receta"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/imagenFotograma2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@android:color/darker_gray"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="12dp"/>
+
+
+        <!-- BOTÓN SUBIR IMAGEN -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_subir_imagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subir imagen"
+            android:layout_marginBottom="24dp"
+            app:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white"/>
+
+        <!-- NOMBRE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Nombre del platillo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- INGREDIENTES -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Ingredientes">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_ingredientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TIEMPO -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="Tiempo de preparación (min)">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiempo_preparacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- BOTÓN SELECCIÓN SABOR -->
+        <Button
+            android:id="@+id/sabor_platillo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar sabor"
+            android:gravity="start"
+            android:textColor="#222"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- PASOS -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:hint="Pasos de preparación">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pasos_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- BOTONES GUARDAR Y ELIMINAR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:layout_marginBottom="32dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_guardar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:text="GUARDAR"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@android:color/black"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchPublicarActualizar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Publicar en el feed"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:text="ELIMINAR"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@android:color/holo_red_dark"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
